@@ -8,14 +8,6 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
         throw new Error("Fastify instance has no value during route construction");
     }
 
-    app.get("/hello", async(_req: FastifyRequest, _reply: FastifyReply) => {
-        return 'hello';
-    });
-
-    app.get("/hello2", async(_req, _reply) => {
-        return 'hello2';
-    });
-
     app.get("/dbTest", async (req, _reply) => {
         return req.em.find(User, {});
     });
