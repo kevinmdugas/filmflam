@@ -14,6 +14,7 @@
     "seed:create": "mikro-orm-esm seeder:create ",
     "seed:run": "pnpm mikro-orm-esm seeder:run",
     "start": "node build/index.js",
+    "startProd": "pnpm db:reset && pnpm start",
     "test": "NODE_NO_WARNINGS=1 tap test/"
   },
   "scriptsComments": {},

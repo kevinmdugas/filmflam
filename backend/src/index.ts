@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import app from "./app.js";
 dotenv.config();
 
-app.listen({ port: Number(process.env.PORT) },
+app.listen({ port: Number(process.env.PORT), host: process.env.HOST },
     (err: Error, address: string) => {
         if (err) {
             console.error(err);
