@@ -3,7 +3,7 @@ import 'chai/register-should.js';  // Using Should style
 import {test, teardown} from "tap";
 import {faker} from "@faker-js/faker";
 import app from '../src/app.js';
-
+import {User} from "../src/db/entities/User.js";
 
 // Cleanup, runs after ALL this file's tests have finished!
 teardown( () => app.close());
@@ -21,8 +21,10 @@ test('Creating new user', async () => {
 
     const payload = {
         name: "Testname",
-        email: faker.internet.email(),
-        favActor: faker.person.fullName()
+        email: "testemail@email.com",
+        favActor: faker.person.fullName(),
+        favTVShow: "Fake show",
+        favMovie: "Fake movie"
     };
 
     const response = await app.inject({

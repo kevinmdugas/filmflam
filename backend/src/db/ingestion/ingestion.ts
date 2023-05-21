@@ -25,7 +25,6 @@ export default function ingestion() {
 
                     console.log("Final merged dataframe")
                     merged.head().print()
-
                     dfd.toJSON(merged, { filePath: finalPath });
                 }).catch(err=>{
                 console.log(err);
