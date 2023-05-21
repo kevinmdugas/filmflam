@@ -1,0 +1,63 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "Filmflam's main backend",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --no-warnings=ExperimentalWarning src/index.ts",
+    "db:reset": "pnpm schema:drop && pnpm schema:update && pnpm seed:run",
+    "lint": "eslint . --ext .ts",
+    "build": "tsc -p tsconfig.json",
+    "schema:drop": "pnpm mikro-orm-esm schema:drop --run",
+    "schema:update": "pnpm mikro-orm-esm schema:update --run --fk-checks",
+    "seed:create": "mikro-orm-esm seeder:create ",
+    "seed:run": "pnpm mikro-orm-esm seeder:run",
+    "start": "node build/index.js",
+    "startProd": "pnpm db:reset && pnpm start",
+    "test": "NODE_NO_WARNINGS=1 tap test/"
+  },
+  "scriptsComments": {},
+  "dependencies": {
+    "@mikro-orm/cli": "^5.7.7",
+    "@mikro-orm/core": "^5.7.7",
+    "@mikro-orm/postgresql": "^5.7.7",
+    "@mikro-orm/reflection": "^5.7.7",
+    "@mikro-orm/seeder": "^5.7.7",
+    "axios": "^1.4.0",
+    "danfojs-node": "^1.1.2",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.17.0",
+    "fastify-plugin": "^4.5.0",
+    "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.1",
+    "@swc/core": "^1.3.59",
+    "@types/chai": "^4.3.5",
+    "@types/node": "^20.2.1",
+    "@types/tap": "^15.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "chai": "^4.3.7",
+    "eslint": "^8.41.0",
+    "nodemon": "^2.0.22",
+    "tap": "^16.3.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./src/db/mikro-orm.config.ts",
+      "./build/db/mikro-orm.config.js"
+    ]
+  },
+  "tap": {
+    "node-arg": [
+      "--loader=ts-node/esm"
+    ],
+    "coverage": false,
+    "ts": true
+  }
+}
