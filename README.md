@@ -26,7 +26,7 @@ ratings datasets that can be run to update or reproduce the final dataset which.
 1. Download the *title.basics.tsv.gz* and *title.basics.tsv.gz* files from IMDb.
 2. Run the `strip_titles.sh` bash script to filter title rows that aren't either movies or tv shows, reducing
     the dataset from about 10 million to just under 900,000.
-3. Run the ingestion file with `npx ts-node --esm ingestion.ts` to produce the final dataset. This took
+3. Run the ingestion file with `npx ts-node --esm Ingestion.ts` to produce the final dataset. This took
    (and you're gonna want to sit down again, maybe stack two foldable chairs and sit on both) about four
     hours on my local machine since it's doing an inner join on two massive datasets. I didn't have time
     to figure out how to optimize this process.
