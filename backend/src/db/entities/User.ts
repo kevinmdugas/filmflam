@@ -1,5 +1,5 @@
-import {Entity, Property, Unique} from "@mikro-orm/core";
-import {BaseEntity} from "./BaseEntity.js";
+import { Entity, Property, Unique } from "@mikro-orm/core";
+import { BaseEntity } from "./BaseEntity.js";
 
 /*
     steps to create and save a review
@@ -33,24 +33,24 @@ import {BaseEntity} from "./BaseEntity.js";
             add the string to their list of reviews.
             - request: email, review string
  */
-@Entity({tableName: "users"})
+@Entity({ tableName: "users" })
 export class User extends BaseEntity {
-    @Property()
-    @Unique()
-    email!: string;
+	@Property()
+	@Unique()
+	email!: string;
 
-    @Property()
-    name!: string;
+	@Property()
+	name!: string;
 
-    @Property()
-    favActor?: string;
+	@Property()
+	favActor?: string;
 
-    @Property()
-    favFilm?: string;
+	@Property()
+	favFilm?: string;
 
-    @Property()
-    favTVShow?: string;
+	@Property()
+	favTVShow?: string;
 
-    @Property()
-    reviews?: string[];
+	@Property()
+	reviews?: string[];
 }

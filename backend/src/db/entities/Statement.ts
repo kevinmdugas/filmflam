@@ -1,6 +1,6 @@
-import {Entity, Property} from "@mikro-orm/core";
-import {BaseEntity} from "./BaseEntity.js";
-import type {ParamType, RatingType} from "../../types.js";
+import { Entity, Property } from "@mikro-orm/core";
+import { BaseEntity } from "./BaseEntity.js";
+import type { ParamType, RatingType } from "../../types.js";
 
 /*
     - Every row of this table represents a statement that might be returned for a particular title depending
@@ -29,13 +29,12 @@ import type {ParamType, RatingType} from "../../types.js";
  */
 @Entity()
 export class Statement extends BaseEntity {
+	@Property()
+	predicates!: string[];
 
-    @Property()
-    predicates!: string[]
+	@Property()
+	paramType!: ParamType;
 
-    @Property()
-    paramType!: ParamType
-
-    @Property()
-    ratingType: RatingType
+	@Property()
+	ratingType: RatingType;
 }
