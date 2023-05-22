@@ -5,20 +5,20 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "check": "pnpm fmt && pnpm lint",
     "dev": "nodemon --no-warnings=ExperimentalWarning src/index.ts",
     "db:reset": "pnpm schema:drop && pnpm schema:update && pnpm seed:run",
-    "check": "pnpm fmt && pnpm lint",
+    "docs:generate": "rimraf ./doc/ && typedoc --options typedoc.json --plugin typedoc-plugin-merge-modules",
     "lint": "eslint . --ext .ts",
     "build": "tsc -p tsconfig.json",
     "fmt": "prettier --write .",
-    "lint": "eslint . --ext .ts",
     "migration:create": "pnpm mikro-orm-esm migration:create --name ",
     "migration:down": "pnpm mikro-orm-esm migration:down",
     "migration:up": "pnpm mikro-orm-esm migration:up",
     "schema:drop": "pnpm mikro-orm-esm schema:drop --run",
     "schema:update": "pnpm mikro-orm-esm schema:update --run --fk-checks",
     "seed:create": "mikro-orm-esm seeder:create ",
-    "seed:run": "pnpm mikro-orm-esm seeder:run",
+    "seed:run": "gzip -d -k src/db/ingestion/FinalTitleSet.json.gz && pnpm mikro-orm-esm seeder:run && rm src/db/ingestion/FinalTitleSet.json",
     "start": "node build/index.js",
     "startProd": "pnpm migration:up && pnpm start",
     "test": "NODE_NO_WARNINGS=1 tap test/"
@@ -34,7 +34,8 @@
     "danfojs-node": "^1.1.2",
     "dotenv": "^16.0.3",
     "fastify": "^4.17.0",
-    "fastify-plugin": "^4.5.0"
+    "fastify-plugin": "^4.5.0",
+    "rimraf": "^5.0.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.1",
@@ -51,6 +52,8 @@
     "prettier": "2.8.8",
     "tap": "^16.3.4",
     "ts-node": "^10.9.1",
+    "typedoc": "^0.24.7",
+    "typedoc-plugin-merge-modules": "^5.0.0",
     "typescript": "^5.0.4"
   },
   "mikro-orm": {
