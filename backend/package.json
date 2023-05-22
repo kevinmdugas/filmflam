@@ -7,8 +7,11 @@
   "scripts": {
     "dev": "nodemon --no-warnings=ExperimentalWarning src/index.ts",
     "db:reset": "pnpm schema:drop && pnpm schema:update && pnpm seed:run",
+    "check": "pnpm fmt && pnpm lint",
     "lint": "eslint . --ext .ts",
     "build": "tsc -p tsconfig.json",
+    "fmt": "prettier --write .",
+    "lint": "eslint . --ext .ts",
     "migration:create": "pnpm mikro-orm-esm migration:create --name ",
     "migration:down": "pnpm mikro-orm-esm migration:down",
     "migration:up": "pnpm mikro-orm-esm migration:up",
@@ -43,7 +46,9 @@
     "@typescript-eslint/parser": "^5.59.6",
     "chai": "^4.3.7",
     "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
     "nodemon": "^2.0.22",
+    "prettier": "2.8.8",
     "tap": "^16.3.4",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
