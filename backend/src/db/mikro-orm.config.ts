@@ -1,11 +1,11 @@
+import { TSMigrationGenerator } from "@mikro-orm/migrations";
 import dotenv from "dotenv";
 dotenv.config();
-import {TsMorphMetadataProvider} from "@mikro-orm/reflection";
-import {defineConfig} from "@mikro-orm/postgresql";
+import { TsMorphMetadataProvider } from "@mikro-orm/reflection";
+import { defineConfig } from "@mikro-orm/postgresql";
+
 import path from "path";
 import { fileURLToPath } from "url";
-import {TSMigrationGenerator} from "@mikro-orm/migrations";
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -27,6 +27,7 @@ export default defineConfig({
     baseDir: "../",
     // Allows our Typescript decorators to serve as entity schemas https://mikro-orm.io/docs/metadata-providers
     metadataProvider: TsMorphMetadataProvider,
+
     seeder: {
         pathTs: seedPath,
         defaultSeeder: "DatabaseSeeder",

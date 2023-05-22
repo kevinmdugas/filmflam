@@ -9,12 +9,15 @@
     "db:reset": "pnpm schema:drop && pnpm schema:update && pnpm seed:run",
     "lint": "eslint . --ext .ts",
     "build": "tsc -p tsconfig.json",
+    "migration:create": "pnpm mikro-orm-esm migration:create --name ",
+    "migration:down": "pnpm mikro-orm-esm migration:down",
+    "migration:up": "pnpm mikro-orm-esm migration:up",
     "schema:drop": "pnpm mikro-orm-esm schema:drop --run",
     "schema:update": "pnpm mikro-orm-esm schema:update --run --fk-checks",
     "seed:create": "mikro-orm-esm seeder:create ",
     "seed:run": "pnpm mikro-orm-esm seeder:run",
     "start": "node build/index.js",
-    "startProd": "pnpm db:reset && pnpm start",
+    "startProd": "pnpm migration:up && pnpm start",
     "test": "NODE_NO_WARNINGS=1 tap test/"
   },
   "scriptsComments": {},
@@ -25,13 +28,10 @@
     "@mikro-orm/postgresql": "5.7.7",
     "@mikro-orm/reflection": "5.7.7",
     "@mikro-orm/seeder": "5.7.7",
-    "axios": "^1.4.0",
     "danfojs-node": "^1.1.2",
     "dotenv": "^16.0.3",
     "fastify": "^4.17.0",
-    "fastify-plugin": "^4.5.0",
-    "node-fetch": "^3.3.1",
-    "zlib": "^1.0.5"
+    "fastify-plugin": "^4.5.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.1",

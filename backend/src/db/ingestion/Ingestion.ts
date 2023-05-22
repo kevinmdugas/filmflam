@@ -2,7 +2,7 @@ import * as dfd from "danfojs-node"
 import path from "path"
 import {fileURLToPath} from "url";
 
-export default function ingestion() {
+function ingestion() {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
     const ratingsPath = path.join(__dirname, "title.ratings.tsv");

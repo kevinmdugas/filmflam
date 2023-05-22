@@ -15,3 +15,10 @@ export type RawStatement = {
     paramType: ParamType,
     ratingType: RatingType
 }
+
+export type RawTitle = {
+    tconst: string,
+    titleType: TitleType,
+    primaryTitle: string,
+    averageRating: string,
+}

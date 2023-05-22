@@ -1,12 +1,14 @@
 import {Entity, Property} from "@mikro-orm/core";
-import {BaseEntity} from "./BaseEntity.js";
 import type {TitleType} from "../../types.js";
 
 /*
 Ingested from the ingestion/FinalTitleSet.json file
  */
 @Entity()
-export class Title extends BaseEntity {
+export class Title {
+    @Property({ primary: true })
+    id!: string;
+
     @Property()
     titleType!: TitleType;
 
@@ -14,5 +16,5 @@ export class Title extends BaseEntity {
     primaryTitle!: string;
 
     @Property()
-    averageRating!: Number;
+    averageRating!: string;
 }
