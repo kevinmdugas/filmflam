@@ -7,7 +7,7 @@ export default function ingestion() {
     const __dirname = path.dirname(__filename);
     const ratingsPath = path.join(__dirname, "title.ratings.tsv");
     const titlePath = path.join(__dirname, "title_stripped.tsv");
-    const finalPath = path.join(__dirname, "final_set.json")
+    const finalPath = path.join(__dirname, "FinalTitleSet_staging.json")
 
     console.log("Reading ratings data...")
     dfd.readCSV(ratingsPath)

@@ -5,3 +5,13 @@ export type CreateUserBody = {
     favFilm?:   string,
     favTVShow?: string,
 }
+
+export type TitleType = "movie" | "tvSeries";
+export type ParamType = "main" | "favActor" | "favMovie" | "favTVShow";
+export type RatingType = "terrible" | "negative" | "average" | "positive" | "exceptional";
+
+export type RawStatement = {
+    predicates: string[],
+    paramType: ParamType,
+    ratingType: RatingType
+}

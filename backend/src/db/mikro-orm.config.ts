@@ -4,6 +4,7 @@ import {TsMorphMetadataProvider} from "@mikro-orm/reflection";
 import {defineConfig} from "@mikro-orm/postgresql";
 import path from "path";
 import { fileURLToPath } from "url";
+import {TSMigrationGenerator} from "@mikro-orm/migrations";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,7 +46,7 @@ export default defineConfig({
         safe: false, // allow to disable table and column dropping
         snapshot: true, // save snapshot when creating new migrations
         emit: "ts", // migration generation mode
-        // generator: TSMigrationGenerator, // migration generator, e.g. to allow custom formatting
+        generator: TSMigrationGenerator, // migration generator, e.g. to allow custom formatting
 
         fileName: (timestamp: string, name?: string) => {
             // force user to provide the name, otherwise we would end up with `Migration20230421212713_undefined`

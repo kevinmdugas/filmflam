@@ -19,16 +19,18 @@
   },
   "scriptsComments": {},
   "dependencies": {
-    "@mikro-orm/cli": "^5.7.7",
-    "@mikro-orm/core": "^5.7.7",
-    "@mikro-orm/postgresql": "^5.7.7",
-    "@mikro-orm/reflection": "^5.7.7",
-    "@mikro-orm/seeder": "^5.7.7",
+    "@mikro-orm/cli": "5.7.7",
+    "@mikro-orm/core": "5.7.7",
+    "@mikro-orm/migrations": "5.7.7",
+    "@mikro-orm/postgresql": "5.7.7",
+    "@mikro-orm/reflection": "5.7.7",
+    "@mikro-orm/seeder": "5.7.7",
     "axios": "^1.4.0",
     "danfojs-node": "^1.1.2",
     "dotenv": "^16.0.3",
     "fastify": "^4.17.0",
     "fastify-plugin": "^4.5.0",
+    "node-fetch": "^3.3.1",
     "zlib": "^1.0.5"
   },
   "devDependencies": {
