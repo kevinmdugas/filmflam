@@ -18,7 +18,7 @@ export class TitleSeeder extends Seeder {
 			context.stmt = em.create(Title, {
 				id: data[i].tconst,
 				titleType: data[i].titleType,
-				primaryTitle: data[i].primaryTitle,
+				primaryTitle: String(data[i].primaryTitle).toLowerCase(),
 				averageRating: data[i].averageRating,
 			});
 		}
