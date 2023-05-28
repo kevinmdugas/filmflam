@@ -1,5 +1,6 @@
 import { User } from "./db/entities/User.js";
 import { FastifyInstance, FastifyReply } from "fastify";
+import { SOFT_DELETABLE_FILTER } from "mikro-orm-soft-delete";
 import {CreateUserBody, UpdateUserBody} from "./types.js";
 import dotenv from "dotenv";
 
@@ -12,7 +13,7 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 	}
 
 	app.get("/dbTest", async (req, _reply) => {
-		return req.em.find(User, {});
+		return req.em.find(User, {}, { filters: { [SOFT_DELETABLE_FILTER]: false } });
 	});
 
 	// Create user
@@ -43,8 +44,10 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 	app.get("/users", async (req, reply) => {
 		try {
 			const theUser = await req.em.find(User, {});
+			app.log.info(theUser);
 			reply.send(theUser);
 		} catch (err) {
+			app.log.error(err);
 			reply.status(500).send(err);
 		}
 	});

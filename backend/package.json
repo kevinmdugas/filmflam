@@ -7,7 +7,6 @@
   "scripts": {
     "check": "pnpm fmt && pnpm lint",
     "dev": "nodemon --no-warnings=ExperimentalWarning src/index.ts",
-    "db:reset": "pnpm schema:drop && pnpm schema:update && pnpm seed:run",
     "docs:generate": "rimraf ./doc/ && typedoc --options typedoc.json --plugin typedoc-plugin-merge-modules",
     "lint": "eslint . --ext .ts",
     "build": "rimraf ./build/ && tsc -p tsconfig.json",
@@ -42,6 +41,7 @@
     "dotenv": "^16.0.3",
     "fastify": "^4.17.0",
     "fastify-plugin": "^4.5.0",
+    "mikro-orm-soft-delete": "^0.1.0",
     "rimraf": "^5.0.1"
   },
   "devDependencies": {

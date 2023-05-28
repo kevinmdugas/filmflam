@@ -1,4 +1,5 @@
 import { Entity, Property, Unique } from "@mikro-orm/core";
+import { SoftDeletable } from "mikro-orm-soft-delete";
 import { FilmFlamBaseEntity } from "./FilmFlamBaseEntity.js";
 
 /*
@@ -33,6 +34,7 @@ import { FilmFlamBaseEntity } from "./FilmFlamBaseEntity.js";
             add the string to their list of reviews.
             - request: email, review string
  */
+@SoftDeletable(() => User, "deleted_at", () => new Date())
 @Entity({ tableName: "users" })
 export class User extends FilmFlamBaseEntity {
 	@Property()
