@@ -1,4 +1,5 @@
 import Fastify, { FastifyInstance } from "fastify";
+import cors from '@fastify/cors'
 import { FastifyMikroOrmPlugin } from "./plugins/mikro.js";
 import config from "./db/mikro-orm.config.js";
 import FFRoutes from "./routes.js";
@@ -32,6 +33,9 @@ const envToLogger = {
 
 const app: FastifyInstance = Fastify({
     logger: envToLogger[process.env.NODE_ENV]
+});
+await app.register(cors, {
+    origin: 'http://localhost:5173'
 });
 await app.register(FastifyMikroOrmPlugin, config);
 await app.register(FastifySearchHttpMethodPlugin);
