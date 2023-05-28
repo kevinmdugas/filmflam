@@ -4,6 +4,7 @@ export type CreateUserBody = {
 	favActor?: string;
 	favFilm?: string;
 	favTVShow?: string;
+	password: string;
 };
 
 export type UpdateUserBody = {

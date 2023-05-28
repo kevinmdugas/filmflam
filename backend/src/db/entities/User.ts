@@ -1,6 +1,7 @@
 import { Entity, Property, Unique } from "@mikro-orm/core";
 import { SoftDeletable } from "mikro-orm-soft-delete";
 import { FilmFlamBaseEntity } from "./FilmFlamBaseEntity.js";
+import { Enum } from "@mikro-orm/core";
 
 /*
     steps to create and save a review
@@ -34,6 +35,12 @@ import { FilmFlamBaseEntity } from "./FilmFlamBaseEntity.js";
             add the string to their list of reviews.
             - request: email, review string
  */
+
+export enum UserRole {
+	ADMIN = 'Admin',
+	USER = 'User'
+}
+
 @SoftDeletable(() => User, "deleted_at", () => new Date())
 @Entity({ tableName: "users" })
 export class User extends FilmFlamBaseEntity {
@@ -43,6 +50,12 @@ export class User extends FilmFlamBaseEntity {
 
 	@Property()
 	name!: string;
+
+	@Property()
+	password!: string;
+
+	@Enum(() => UserRole)
+	role!: UserRole;
 
 	@Property()
 	favActor?: string;

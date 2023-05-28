@@ -1,11 +1,10 @@
-import { User } from "./db/entities/User.js";
+import { User, UserRole } from "./db/entities/User.js";
 import { FastifyInstance, FastifyReply } from "fastify";
 import { SOFT_DELETABLE_FILTER } from "mikro-orm-soft-delete";
 import {CreateUserBody, UpdateUserBody} from "./types.js";
 import dotenv from "dotenv";
 
 dotenv.config();
-const adminPassword = process.env.PASSWORD;
 
 async function FFRoutes(app: FastifyInstance, _options = {}) {
 	if (!app) {
@@ -19,7 +18,7 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 	// Create user
 	app.post<{ Body: CreateUserBody }>("/users", async (req, reply: FastifyReply) => {
 		// Fish data out of request (auto converts from json)
-		const { email, name, favActor, favFilm, favTVShow } = req.body;
+		const { email, name, favActor, favFilm, favTVShow, password } = req.body;
 		try {
 			// Get our manager from the plugin we wrote
 			const newUser = await req.em.create(User, {
@@ -28,14 +27,14 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 				favActor,
 				favFilm,
 				favTVShow,
+				role: UserRole.USER,
+				password
 			});
 			// This will immediately update the real database.  You can store up several changes and flush only once
 			// NOTE THE AWAIT -- do not forget it or weirdness abounds
 			await req.em.flush();
-			app.log.info("Created new user:", newUser);
 			return reply.send(newUser);
 		} catch (err) {
-			app.log.error("Failed to create new user: ", err.message);
 			return reply.status(500).send({ message: err.message });
 		}
 	});
@@ -44,10 +43,8 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 	app.get("/users", async (req, reply) => {
 		try {
 			const theUser = await req.em.find(User, {});
-			app.log.info(theUser);
 			reply.send(theUser);
 		} catch (err) {
-			app.log.error(err);
 			reply.status(500).send(err);
 		}
 	});
@@ -57,11 +54,9 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 		const { id } = req.body;
 
 		try {
-			const theUser = await req.em.findOne(User, { id });
-			app.log.info(theUser);
+			const theUser = await req.em.findOneOrFail(User, id, {strict: true});
 			reply.send(theUser);
 		} catch (err) {
-			app.log.error(err);
 			reply.status(500).send(err);
 		}
 	});
@@ -70,32 +65,39 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 	app.put<{ Body: UpdateUserBody }>("/users", async (req, reply) => {
 		const { id, name, favActor, favFilm, favTVShow } = req.body;
 
-		const userToChange = await req.em.findOne(User, { id });
+		const userToChange = await req.em.findOneOrFail(User, id, {strict: true});
 		userToChange.name = name;
 		userToChange.favActor = favActor;
 		userToChange.favFilm = favFilm;
 		userToChange.favTVShow = favTVShow;
 
 		await req.em.flush();
-		app.log.info(userToChange);
 		reply.send(userToChange);
 	});
 
 	// Delete user
-	app.delete<{ Body: { id: number; password: string } }>("/users", async (req, reply) => {
-		const { id, password } = req.body;
-
-		if (adminPassword !== password) {
-			return reply.status(401).send();
-		}
+	app.delete<{ Body: { my_id: number; id_to_delete: number, password: string } }>("/users", async (req, reply) => {
+		const { my_id, id_to_delete, password } = req.body;
 
 		try{
-			const theUser = await req.em.findOneOrFail(User, id);
-			await req.em.remove(theUser).flush();
-			app.log.info(theUser);
-			reply.send(theUser);
+			const me = await req.em.findOneOrFail(User, my_id, {strict: true});
+
+			if (me.password !== password) {
+				return reply.status(401).send();
+			}
+
+			if (me.role === UserRole.USER) {
+				return reply.status(401).send({ "message": "You are not an admin!"})
+			}
+
+			const userToDelete = await req.em.findOneOrFail(User, id_to_delete, {strict: true});
+
+			if (userToDelete.role === UserRole.ADMIN) {
+				return reply.status(401).send({"message": "You do not have enough privileges to delete an Admin!"})
+			}
+			await req.em.remove(userToDelete).flush();
+			return reply.send(userToDelete);
 		} catch(err) {
-			app.log.error(err);
 			reply.status(500).send(err);
 		}
 	});
