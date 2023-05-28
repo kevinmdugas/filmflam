@@ -6,6 +6,14 @@ export type CreateUserBody = {
 	favTVShow?: string;
 };
 
+export type UpdateUserBody = {
+	id: number,
+	name: string,
+	favActor?: string;
+	favFilm?: string;
+	favTVShow?: string;
+}
+
 export type TitleType = "movie" | "tvSeries";
 export type ParamType = "main" | "favActor" | "favMovie" | "favTVShow";
 export type RatingType = "terrible" | "negative" | "average" | "positive" | "exceptional";

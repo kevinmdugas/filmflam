@@ -4,4 +4,4 @@
 **/.code
 *.html
 *.json
-doc/
+**/doc/

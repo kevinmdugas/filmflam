@@ -1,10 +1,11 @@
-import {Header, Button} from "./components/Components.tsx";
+import {Header, Button, Users} from "./components/Components.tsx";
 import '@css/App.css'
 
 function App() {
     return (
         <div className="App">
             <Header />
+            <Users />
             <Button />
         </div>
     );

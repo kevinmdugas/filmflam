@@ -1,5 +1,5 @@
 import { Entity, Property, Unique } from "@mikro-orm/core";
-import { BaseEntity } from "./BaseEntity.js";
+import { FilmFlamBaseEntity } from "./FilmFlamBaseEntity.js";
 
 /*
     steps to create and save a review
@@ -34,7 +34,7 @@ import { BaseEntity } from "./BaseEntity.js";
             - request: email, review string
  */
 @Entity({ tableName: "users" })
-export class User extends BaseEntity {
+export class User extends FilmFlamBaseEntity {
 	@Property()
 	@Unique()
 	email!: string;

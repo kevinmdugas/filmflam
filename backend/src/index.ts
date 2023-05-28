@@ -9,6 +9,8 @@ app.listen(
 			console.error(err);
 			process.exit(1);
 		}
-		console.log(`Started server at ${address}`);
+		app.log.info(`Started server at ${address}`);
+		app.log.debug("Debug level");
+		app.log.trace("Trace level");
 	}
 );

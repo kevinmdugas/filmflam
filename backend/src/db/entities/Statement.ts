@@ -1,5 +1,5 @@
 import { Entity, Property } from "@mikro-orm/core";
-import { BaseEntity } from "./BaseEntity.js";
+import { FilmFlamBaseEntity } from "./FilmFlamBaseEntity.js";
 import type { ParamType, RatingType } from "../../types.js";
 
 /*
@@ -28,7 +28,7 @@ import type { ParamType, RatingType } from "../../types.js";
                  }
  */
 @Entity()
-export class Statement extends BaseEntity {
+export class Statement extends FilmFlamBaseEntity {
 	@Property()
 	predicates!: string[];
 
