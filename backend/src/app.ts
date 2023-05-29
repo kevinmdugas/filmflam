@@ -34,9 +34,13 @@ const envToLogger = {
 const app: FastifyInstance = Fastify({
     logger: envToLogger[process.env.NODE_ENV]
 });
+
 await app.register(cors, {
-    origin: 'http://localhost:5173'
+    origin: (origin, cb) => {
+        cb(null, true);
+    }
 });
+
 await app.register(FastifyMikroOrmPlugin, config);
 await app.register(FastifySearchHttpMethodPlugin);
 await app.register(FFRoutes, {});
