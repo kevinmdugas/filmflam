@@ -1,6 +1,6 @@
-import { Home } from "./Components.js";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "@css/App.css";
+import {FilmFlamRoutes} from "@/Routes.tsx";
 
 //Screens
 // - Home - not logged in
@@ -26,22 +26,8 @@ import "@css/App.css";
 function App() {
 	return (
 		<BrowserRouter>
-			<div className="App">
-				<nav>
-					<div className="menu">
-						<Link to="/">Home </Link>
-						<Link to="/login"> Log In </Link>
-						<Link to="/signup"> Sign Up </Link>
-						<Link to="/about"> About </Link>
-					</div>
-				</nav>
-				<Routes>
-					{""}
-					<Route path="/" element={<Home />} />
-					{/*<Route path="/login" element={<Login />} />*/}
-					{/*<Route path="/signup" element={<Signup />} />*/}
-					{/*<Route path="/about" element={<About />} />*/}
-				</Routes>
+			<div className="App filmflam">
+				<FilmFlamRoutes />
 			</div>
 		</BrowserRouter>
 	);

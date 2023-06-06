@@ -1,21 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export const Home = () => {
-	return (
-		<div>
-			<Header />
-			<Button />
-			<UsersList />
-		</div>
-	);
-};
-
 export const Header = () => {
 	return (
 		<div>
-			<h1>FilmFlam</h1>
-			<h3>Just a bunch of dumb bullshit</h3>
+			<h1 className="text-title">FilmFlam
+			<small className="text-body-secondary"> Just a bunch of dumb bullshit</small>
+			</h1>
 		</div>
 	);
 };
@@ -59,8 +50,7 @@ export const UsersList = () => {
 				<ul>
 					{users.map((user: { email: string; name: string }) => (
 						<li key={user.email}>
-							{" "}
-							{user.name} - {user.email}{" "}
+							{user.name} - {user.email}
 						</li>
 					))}
 				</ul>
