@@ -1,5 +1,5 @@
 import { Entity, Property } from "@mikro-orm/core";
-import type { TitleType } from "../../types.js";
+import type {RatingType, TitleType} from "../../types.js";
 
 /*
 Ingested from the ingestion/FinalTitleSet.json file
@@ -17,4 +17,7 @@ export class Title {
 
 	@Property()
 	averageRating!: string;
+
+	@Property()
+	ratingType!: RatingType;
 }

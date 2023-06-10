@@ -2,7 +2,7 @@ import Fastify, { FastifyInstance } from "fastify";
 import cors from '@fastify/cors'
 import { FastifyMikroOrmPlugin } from "./plugins/mikro.js";
 import config from "./db/mikro-orm.config.js";
-import FFRoutes from "./routes.js";
+import FFRoutes from "./routes/routes.js";
 import { FastifySearchHttpMethodPlugin } from "./plugins/http_search.js";
 
 const envToLogger = {

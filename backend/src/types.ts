@@ -16,7 +16,7 @@ export type UpdateUserBody = {
 }
 
 export type TitleType = "movie" | "tvSeries";
-export type ParamType = "main" | "favActor" | "favMovie" | "favTVShow";
+export type ParamType = "main" | "favActor" | "favFilm" | "favTVShow";
 export type RatingType = "terrible" | "negative" | "average" | "positive" | "exceptional";
 
 export type RawStatement = {

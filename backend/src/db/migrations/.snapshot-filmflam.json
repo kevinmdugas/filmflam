@@ -126,6 +126,15 @@
           "primary": false,
           "nullable": false,
           "mappedType": "string"
+        },
+        "rating_type": {
+          "name": "rating_type",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
         }
       },
       "name": "title",

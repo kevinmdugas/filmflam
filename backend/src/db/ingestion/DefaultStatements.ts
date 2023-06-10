@@ -98,7 +98,7 @@ export function DefaultStatements() {
 		{
 			predicates: [
 				"OHHHHHH MYYYY GOOOOOODDDDD INJEEEEECT ",
-				" INTO MY VEEEEEEEINSSSSSSSSSS! *Snorts a mysterious white powder* AHHH ASBESTOOOOOS, NOT AGAAAAIN!",
+				" INTO MY VEEEEEEEINSSSSSSSSSS! *snorts a mysterious white powder* AHHH ASBESTOS, NOT AGAAAAIN!",
 			],
 			paramType: "main",
 			ratingType: "exceptional",
@@ -132,7 +132,7 @@ export function DefaultStatements() {
 				" I had to cleanse the pallet, as it were, afterwards by playing ",
 				" on a loop, rocking back and forth and shouting 'BILLY DOESN'T LIKE THAT' over and over until they sent the authorities to collect me with a big butterfly net.",
 			],
-			paramType: "favMovie",
+			paramType: "favFilm",
 			ratingType: "terrible",
 		},
 		{
@@ -147,7 +147,7 @@ export function DefaultStatements() {
 		},
 		{
 			predicates: ["negative movie pred", ""],
-			paramType: "favMovie",
+			paramType: "favFilm",
 			ratingType: "negative",
 		},
 		{
@@ -161,12 +161,12 @@ export function DefaultStatements() {
 			ratingType: "average",
 		},
 		{
-			predicates: ["average move", ""],
-			paramType: "favMovie",
+			predicates: ["average movie", ""],
+			paramType: "favFilm",
 			ratingType: "average",
 		},
 		{
-			predicates: ["averate tv show", ""],
+			predicates: ["average tv show", ""],
 			paramType: "favTVShow",
 			ratingType: "average",
 		},
@@ -177,7 +177,7 @@ export function DefaultStatements() {
 		},
 		{
 			predicates: ["positive movie", ""],
-			paramType: "favMovie",
+			paramType: "favFilm",
 			ratingType: "positive",
 		},
 		{
@@ -192,7 +192,7 @@ export function DefaultStatements() {
 		},
 		{
 			predicates: ["exceptional movie", ""],
-			paramType: "favMovie",
+			paramType: "favFilm",
 			ratingType: "exceptional",
 		},
 		{

@@ -4,7 +4,7 @@ import {Home} from "@/components/Home.tsx";
 export function FilmFlamRoutes() {
     return (
         <>
-            <nav className="navbar fixed-top navbar-expand bg-body-secondary">
+            <nav className="navbar fixed-top navbar-expand bg-body-secondary shadow-lg">
                 <div className="container-fluid">
                     <div>
                         <Link className="navbar-brand text-title fs-1 fw-bold fst-italic" to="/">FilmFlam </Link>
