@@ -30,4 +30,6 @@ export type RawTitle = {
 	titleType: TitleType;
 	primaryTitle: string;
 	averageRating: string;
+	startYear: string;
+	genres: string;
 };

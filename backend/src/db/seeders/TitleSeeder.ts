@@ -21,6 +21,8 @@ export class TitleSeeder extends Seeder {
 				primaryTitle: String(data[i].primaryTitle).toLowerCase(),
 				averageRating: data[i].averageRating,
 				ratingType: determineRatingType(Number(data[i].averageRating)),
+				year: data[i].startYear,
+				genres: data[i].genres.split(","),
 			});
 		}
 	}

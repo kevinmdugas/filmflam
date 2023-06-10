@@ -135,6 +135,24 @@
           "primary": false,
           "nullable": false,
           "mappedType": "string"
+        },
+        "year": {
+          "name": "year",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "genres": {
+          "name": "genres",
+          "type": "text[]",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "array"
         }
       },
       "name": "title",

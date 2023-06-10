@@ -20,4 +20,10 @@ export class Title {
 
 	@Property()
 	ratingType!: RatingType;
+
+	@Property()
+	year!: string;
+
+	@Property()
+	genres!: string[];
 }
