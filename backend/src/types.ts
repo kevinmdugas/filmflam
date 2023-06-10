@@ -9,10 +9,12 @@ export type CreateUserBody = {
 
 export type UpdateUserBody = {
 	id: number,
+	email: string,
 	name: string,
 	favActor?: string;
 	favFilm?: string;
 	favTVShow?: string;
+	reviews?: string[];
 }
 
 export type TitleType = "movie" | "tvSeries";

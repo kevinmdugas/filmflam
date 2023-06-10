@@ -71,13 +71,15 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 
 	// Update user
 	app.put<{ Body: UpdateUserBody }>("/users", async (req, reply) => {
-		const { id, name, favActor, favFilm, favTVShow } = req.body;
+		const { id, name, email, favActor, favFilm, favTVShow, reviews } = req.body;
 
 		const userToChange = await req.em.findOneOrFail(User, id, {strict: true});
 		userToChange.name = name;
+		userToChange.email = email;
 		userToChange.favActor = favActor;
 		userToChange.favFilm = favFilm;
 		userToChange.favTVShow = favTVShow;
+		userToChange.reviews = reviews;
 
 		await req.em.flush();
 		reply.send(userToChange);
