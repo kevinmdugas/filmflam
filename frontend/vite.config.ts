@@ -16,5 +16,18 @@ export default defineConfig(({ command, mode }) => {
 			setupFiles: "./test/setup.ts",
 		},
 		envPrefix: alphabet,
+		server: {
+			watch: {
+				usePolling: true,
+			},
+			host: true,
+			strictPort: true,
+			port: 5173,
+		},
+		build: {
+			target: "esnext",
+			emptyOutDir: true,
+			outDir: "build"
+		}
 	};
 });

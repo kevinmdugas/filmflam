@@ -13,7 +13,6 @@ services:
       - POSTGRES_PASSWORD=pass
       - POSTGRES_DB=filmflam
     healthcheck:
-      # Referencing env vars to prevent error messages
       test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
       interval: 10s
       timeout: 5s
@@ -36,6 +35,19 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+
+#  frontend:
+#    container_name: frontend
+#    build: ./frontend/
+#    restart: always
+#    ports:
+#      - "80:80"
+#    environment:
+#      - API_HOST=backend
+#      - PORT=8080
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
 
 volumes:
   db:
