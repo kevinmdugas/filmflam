@@ -11,3 +11,12 @@ export type Profile = {
 	favTVShow: string;
 	reviews: string[];
 };
+
+export type Title = {
+	id: string,
+	titleType: string,
+	primaryTitle: string,
+	averageRating: string,
+	genres: string[],
+	year: string
+}

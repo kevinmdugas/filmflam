@@ -40,3 +40,36 @@
 .read-the-docs {
 	color: #888;
 }
+
+.title-container {
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.title-primary {
+	font-weight: bold;
+}
+
+.title-year {
+	margin-left: 10px;
+	color: #777;
+}
+
+.title-genres {
+	margin-top: 10px;
+}
+
+.genre {
+	display: inline-block;
+	padding: 2px 5px;
+	/*margin-right: 5px;*/
+	/*border-radius: 4px;*/
+}
+
+.title-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+

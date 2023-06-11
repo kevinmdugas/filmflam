@@ -119,7 +119,7 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 		let { titleName } = req.body;
 		titleName = titleName.toLowerCase()
 		try{
-			const matchingTitles = await req.em.find(Title, { primary_title: titleName });
+			const matchingTitles = await req.em.find(Title, { primaryTitle: titleName });
 			console.log(matchingTitles)
 			reply.send(matchingTitles)
 		} catch (err) {
