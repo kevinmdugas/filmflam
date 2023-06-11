@@ -1,5 +1,6 @@
 import {Link, Route, Routes} from "react-router-dom";
 import {Home} from "@/components/Home.tsx";
+import {SignUpPage} from "@/components/SignUp.tsx";
 
 export function FilmFlamRoutes() {
     return (
@@ -38,7 +39,7 @@ export function FilmFlamRoutes() {
             <Routes>
                 <Route path="/" element={<Home />}/>
                 {/*<Route path="/login" element={<Login />} />*/}
-                {/*<Route path="/signup" element={<Signup />} />*/}
+                <Route path="/signup" element={<SignUpPage />} />
                 {/*<Route path="/about" element={<About />} />*/}
             </Routes>
         </>

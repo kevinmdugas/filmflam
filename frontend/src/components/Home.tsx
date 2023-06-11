@@ -4,7 +4,7 @@ import {Title, Review} from "@/types.ts";
 import {ReviewService} from "@/services/ReviewService.tsx";
 
 export const Home = () => {
-    const [user, setUser] = useState<number | null>(null);
+    const [user, setUser] = useState<number | null>(1);
     const [titleInput, setTitleInput] = useState("");
     const [resTitles, setResTitles] = useState<Title[] | null>(null);
     const [selectedTitle, setSelectedTitle] = useState<Title | null>(null);
@@ -135,14 +135,16 @@ export const Home = () => {
                         <h2 className="mt-4">Review for {review.mainStmt[1]}</h2>
                     </div>
                     <div>
-                       <p className="text-title fst-italic">"{formatReview(review)}"</p>
+                        <blockquote className="blockquote">
+                            <p className="text-title fst-italic">"{formatReview(review)}"</p>
+                        </blockquote>
                     </div>
                     <div>
                         <button onClick={() => handleTitleSelect(selectedTitle)} className="btn btn-primary m-3">Generate Another Review</button>
                         {user ?
-                            <button className="btn btn-primary m-3">Save</button>
+                            <button className="btn btn-primary m-3">Save Review</button>
                             :
-                            <button className="btn btn-primary m-3 disabled">Log in to Save</button>
+                            <button className="btn btn-primary m-3 disabled">Log In to Save Review</button>
                         }
                     </div>
                 </>
