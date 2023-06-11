@@ -1,17 +1,23 @@
 import { useState } from "react";
 import {TitleService} from "@/services/TitleService.tsx";
-import {Title} from "@/types.ts";
+import {Title, Review} from "@/types.ts";
+import {ReviewService} from "@/services/ReviewService.tsx";
 
 export const Home = () => {
     const [user, setUser] = useState<number | null>(null);
     const [titleInput, setTitleInput] = useState("");
     const [resTitles, setResTitles] = useState<Title[] | null>(null);
+    const [selectedTitle, setSelectedTitle] = useState<Title | null>(null);
     const [searchFail, setSearchFail] = useState(false);
-    const [review, setReview] = useState<string[] | null>(null);
+    const [review, setReview] = useState<Review | null>(null);
+    const [reviewFail, setReviewFail] = useState(false);
 
     const onSubmitButtonClick = async () => {
         setSearchFail(false);
         setResTitles(null);
+        setReview(null);
+        setReviewFail(false);
+        setSelectedTitle(null);
         try {
             const titles: Title[] = await TitleService.fetchTitles(titleInput);
             if (titles && titles.length > 0) {
@@ -29,9 +35,25 @@ export const Home = () => {
         }
     };
 
-    const handleTitleSelect = (title: Title) => {
-        // Handle the selection of a title
-        console.log(`Title with ID ${title.id} selected.`);
+    const handleTitleSelect = async (title: Title | null) => {
+        if (!title) {
+            console.error("Cannot generate a review, title is null");
+            return;
+        }
+
+        // Variable that allows us to regenerate reviews, only set if null to avoid re-renders
+        if (!selectedTitle) {
+            setSelectedTitle(title);
+        }
+
+        try{
+            const review: Review = await ReviewService.generateReview(title.id, user);
+            review.mainStmt[1] = capitalizeTitle(review.mainStmt[1])
+            setReview(review)
+        } catch (err) {
+            console.error(err)
+            setReviewFail(true);
+        }
     };
 
     function capitalizeTitle(title: string): string {
@@ -39,6 +61,14 @@ export const Home = () => {
             .split(' ')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
+    }
+
+    function formatReview(review: Review): string {
+        let finalReview = review.mainStmt[0] + review.mainStmt[1] + review.mainStmt[2]
+        if (review.addonStmt) {
+            finalReview += review.addonStmt[0] + review.addonStmt[1] + review.addonStmt[2]
+        }
+        return finalReview;
     }
 
     return (
@@ -53,12 +83,17 @@ export const Home = () => {
                 />
             </div>
             {searchFail &&
-                <div>
+                <div className="mt-3">
                     <p className="text-warning">Could not find title... Please try again.</p>
                 </div>
             }
+            {reviewFail &&
+                <div className="mt-3">
+                    <p className="text-warning">Could not generate a review... Please try again.</p>
+                </div>
+            }
             <button onClick={onSubmitButtonClick} className="btn btn-primary my-3">Search for Title</button>
-            {resTitles &&
+            {resTitles && !review &&
                 <div>
                     <h2 className="mt-4">Movie and TV Show Titles</h2>
                     {resTitles.length > 1 ?
@@ -70,10 +105,10 @@ export const Home = () => {
                         {resTitles.map((title) =>(
                             <div key={title.id} className="title-container">
                                 <div>
-                                    <span className="title-primary text-title fs-1 fw-bold fst-italic">{title.primaryTitle}</span>
+                                    <span className="text-title fs-1 fw-bold fst-italic">{title.primaryTitle}</span>
                                 </div>
                                 <div>
-                                    <span className="title-year">({title.year})</span>
+                                    <span className="title-year">({title.year} {title.titleType == "movie" ? "Movie" : "TV Show"})</span>
                                 </div>
                                 <div>
                                     <span className="text-primary">Average Rating: {title.averageRating}</span>
@@ -85,7 +120,7 @@ export const Home = () => {
                                 </div>
                                 <button
                                     onClick={() => handleTitleSelect(title)}
-                                    className="btn btn-primary mt-3">
+                                    className="btn btn-primary my-3">
                                     Select
                                 </button>
                             </div>
@@ -94,6 +129,25 @@ export const Home = () => {
                     </div>
                 </div>
             }
+            {review && (
+                <>
+                    <div>
+                        <h2 className="mt-4">Review for {review.mainStmt[1]}</h2>
+                    </div>
+                    <div>
+                       <p className="text-title fst-italic">"{formatReview(review)}"</p>
+                    </div>
+                    <div>
+                        <button onClick={() => handleTitleSelect(selectedTitle)} className="btn btn-primary m-3">Generate Another Review</button>
+                        {user ?
+                            <button className="btn btn-primary m-3">Save</button>
+                            :
+                            <button className="btn btn-primary m-3 disabled">Log in to Save</button>
+                        }
+                    </div>
+                </>
+
+            )}
         </>
     );
 };

@@ -20,3 +20,8 @@ export type Title = {
 	genres: string[],
 	year: string
 }
+
+export type Review = {
+	mainStmt: string[],
+	addonStmt: string[],
+}
