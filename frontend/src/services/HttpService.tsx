@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
-// import { Search } from "react-router-dom";
 
 const serverIP = import.meta.env.API_HOST;
 const serverPort = import.meta.env.PORT;
@@ -19,8 +18,6 @@ let httpClient: SearchableAxiosInstance = axios.create({
 
 }) as SearchableAxiosInstance;
 
-// Note we have to do this separately from axios.create above
-// because it has to be first typecast to Searchable
 httpClient.search = async(path, data) => {
     let config = {
         method: "SEARCH",

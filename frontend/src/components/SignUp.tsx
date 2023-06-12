@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import {useAuth} from "@/services/Auth.tsx";
 
 export const SignUpPage = () => {
+    const auth = useAuth();
     const [formData, setFormData] = useState({
         email: '',
         name: '',
@@ -10,13 +12,19 @@ export const SignUpPage = () => {
         favTVShow: ''
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e: any) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         console.log(formData);
+        const success = await auth?.createAccount(formData.email, formData.password);
+        if (success) {
+            console.log("Login success")
+        } else {
+            console.error("Login failed")
+        }
     };
 
     return (
@@ -32,7 +40,6 @@ export const SignUpPage = () => {
                         className="form-control"
                         id="email"
                         name="email"
-                        placeholder="vdeezbabyyy@family4lyf3.com"
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -48,7 +55,6 @@ export const SignUpPage = () => {
                         className="form-control"
                         id="name"
                         name="name"
-                        placeholder="Vin Diesel"
                         value={formData.name}
                         onChange={handleChange}
                         required
@@ -64,7 +70,6 @@ export const SignUpPage = () => {
                         className="form-control"
                         id="password"
                         name="password"
-                        placeholder="vrooom123"
                         value={formData.password}
                         onChange={handleChange}
                         required
@@ -80,7 +85,6 @@ export const SignUpPage = () => {
                         className="form-control"
                         id="favoriteActor"
                         name="favoriteActor"
-                        placeholder="Vin Diesel"
                         value={formData.favActor}
                         onChange={handleChange}
                     />
@@ -95,7 +99,6 @@ export const SignUpPage = () => {
                         className="form-control"
                         id="favoriteFilm"
                         name="favoriteFilm"
-                        placeholder="Dragonball Evolution"
                         value={formData.favFilm}
                         onChange={handleChange}
                     />
@@ -110,7 +113,6 @@ export const SignUpPage = () => {
                         className="form-control"
                         id="favoriteTVShow"
                         name="favoriteTVShow"
-                        placeholder="The Joy of Painting"
                         value={formData.favTVShow}
                         onChange={handleChange}
                     />

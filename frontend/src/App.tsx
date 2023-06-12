@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import "@css/App.css";
 import {FilmFlamRoutes} from "@/Routes.tsx";
+import {AuthProvider} from "@/services/Auth.tsx";
 
 //Screens
 // - Home - not logged in
@@ -26,9 +27,11 @@ import {FilmFlamRoutes} from "@/Routes.tsx";
 function App() {
 	return (
 		<BrowserRouter>
-			<div className="App filmflam">
-				<FilmFlamRoutes />
-			</div>
+			<AuthProvider>
+				<div className="App filmflam">
+					<FilmFlamRoutes />
+				</div>
+			</AuthProvider>
 		</BrowserRouter>
 	);
 }
