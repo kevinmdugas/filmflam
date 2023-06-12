@@ -46,6 +46,10 @@ export enum UserRole {
 export class User extends FilmFlamBaseEntity {
 	@Property()
 	@Unique()
+	loginUID: string;
+
+	@Property()
+	@Unique()
 	email!: string;
 
 	@Property()

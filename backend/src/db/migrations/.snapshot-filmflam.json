@@ -212,6 +212,15 @@
           "length": 6,
           "mappedType": "datetime"
         },
+        "login_uid": {
+          "name": "login_uid",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
         "email": {
           "name": "email",
           "type": "varchar(255)",
@@ -292,6 +301,15 @@
       "name": "users",
       "schema": "public",
       "indexes": [
+        {
+          "columnNames": [
+            "login_uid"
+          ],
+          "composite": false,
+          "keyName": "users_login_uid_unique",
+          "primary": false,
+          "unique": true
+        },
         {
           "columnNames": [
             "email"

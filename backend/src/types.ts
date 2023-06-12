@@ -5,16 +5,17 @@ export type CreateUserBody = {
 	favFilm?: string;
 	favTVShow?: string;
 	password: string;
+	loginUID: string;
 };
 
 export type UpdateUserBody = {
-	id: number,
 	email: string,
 	name: string,
 	favActor?: string;
 	favFilm?: string;
 	favTVShow?: string;
 	reviews?: string[];
+	loginUID: string;
 }
 
 export type TitleType = "movie" | "tvSeries";

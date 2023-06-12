@@ -23,7 +23,7 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 	// Create user
 	app.post<{ Body: CreateUserBody }>("/users", async (req, reply: FastifyReply) => {
 		// Fish data out of request (auto converts from json)
-		const { email, name, favActor, favFilm, favTVShow, password } = req.body;
+		const { email, name, favActor, favFilm, favTVShow, password, loginUID } = req.body;
 		try {
 			// Get our manager from the plugin we wrote
 			const newUser = await req.em.create(User, {
@@ -33,7 +33,8 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 				favFilm,
 				favTVShow,
 				role: UserRole.USER,
-				password
+				password,
+				loginUID
 			});
 			// This will immediately update the real database.  You can store up several changes and flush only once
 			// NOTE THE AWAIT -- do not forget it or weirdness abounds
@@ -58,10 +59,10 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 
 	// Retrieve user
 	app.search("/users", async (req, reply) => {
-		const { id } = req.body;
+		const { loginUID } = req.body;
 
 		try {
-			const theUser = await req.em.findOneOrFail(User, id, {strict: true});
+			const theUser = await req.em.findOneOrFail(User, {loginUID: loginUID}, {strict: true});
 			reply.send(theUser);
 		} catch (err) {
 			reply.status(500).send(err);
@@ -71,9 +72,9 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 
 	// Update user
 	app.put<{ Body: UpdateUserBody }>("/users", async (req, reply) => {
-		const { id, name, email, favActor, favFilm, favTVShow, reviews } = req.body;
+		const { loginUID, name, email, favActor, favFilm, favTVShow, reviews } = req.body;
 
-		const userToChange = await req.em.findOneOrFail(User, id, {strict: true});
+		const userToChange = await req.em.findOneOrFail(User, {loginUID: loginUID}, {strict: true});
 		userToChange.name = name;
 		userToChange.email = email;
 		userToChange.favActor = favActor;
@@ -87,11 +88,11 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 
 
 	// Delete user
-	app.delete<{ Body: { my_id: number; id_to_delete: number, password: string } }>("/users", async (req, reply) => {
-		const { my_id, id_to_delete, password } = req.body;
+	app.delete<{ Body: { my_loginUID: string; loginUID_to_delete: string, password: string } }>("/users", async (req, reply) => {
+		const { my_loginUID, loginUID_to_delete, password } = req.body;
 
 		try{
-			const me = await req.em.findOneOrFail(User, my_id, {strict: true});
+			const me = await req.em.findOneOrFail(User, {loginUID: my_loginUID}, {strict: true});
 
 			if (me.password !== password) {
 				return reply.status(401).send();
@@ -101,7 +102,7 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 				return reply.status(401).send({ "message": "You are not an admin!"})
 			}
 
-			const userToDelete = await req.em.findOneOrFail(User, id_to_delete, {strict: true});
+			const userToDelete = await req.em.findOneOrFail(User, {loginUID: loginUID_to_delete}, {strict: true});
 
 			if (userToDelete.role === UserRole.ADMIN) {
 				return reply.status(401).send({"message": "You do not have enough privileges to delete an Admin!"})
@@ -129,8 +130,8 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 
 
 	// Generate review
-	app.post<{ Body: { userId: number | null, titleId: string } }>("/reviews", async (req, reply) => {
-		const { userId, titleId } = req.body;
+	app.post<{ Body: { loginUID: string | null, titleId: string } }>("/reviews", async (req, reply) => {
+		const { loginUID, titleId } = req.body;
 		try{
 			const foundTitle = await req.em.findOneOrFail(Title, titleId, {strict: true})
 
@@ -146,8 +147,8 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 			let response = { mainStmt: [mainPreds[0], foundTitle.primaryTitle, mainPreds[1]] }
 
 			// If there is a user, add an additional statement using their profile information
-			if (userId) {
-				const theUser = await req.em.findOneOrFail(User, userId, {strict: true});
+			if (loginUID) {
+				const theUser = await req.em.findOneOrFail(User, {loginUID: loginUID}, {strict: true});
 				const addonStmt = await getAddonStatement(req.em, theUser, foundTitle.ratingType);
 				response["addonStmt"] = addonStmt;
 			}
