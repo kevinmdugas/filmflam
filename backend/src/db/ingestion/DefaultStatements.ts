@@ -136,67 +136,106 @@ export function DefaultStatements() {
 			ratingType: "terrible",
 		},
 		{
-			predicates: ["After it was over, I watched every episode of", "instead of putting my head a in a microwave on the popcorn setting to erase all memories of that trauma."],
+			predicates: [
+				"After it was over, I watched every episode of",
+				"instead of putting my head in a microwave on the popcorn setting to erase all memories of that trauma.",
+			],
 			paramType: "favTVShow",
 			ratingType: "terrible",
 		},
 		{
-			predicates: ["If", "knew that I watched that, they would probably choke me out which honestly I'm kind of into after suffering through whatever that was."],
+			predicates: [
+				"If",
+				"knew that I watched that, they would probably choke me out which honestly I'm kind of into after suffering through whatever that was.",
+			],
 			paramType: "favActor",
 			ratingType: "negative",
 		},
 		{
-			predicates: ["So you know, it was bad. It's like kind of like my favorite movie", "if absolutely everyone involed in making that decided that didn't care about their art."],
+			predicates: [
+				"So you know, it was bad. It's like kind of like my favorite movie",
+				"if absolutely everyone involed in making that decided that didn't care about their art.",
+			],
 			paramType: "favFilm",
 			ratingType: "negative",
 		},
 		{
-			predicates: ["And you know how I'm obsessed with", "right? Now I'm even more obsessed with it because it's markedly NOT whatever that trash was."],
+			predicates: [
+				"And you know how I'm obsessed with",
+				"right? Now I'm even more obsessed with it because it's markedly NOT whatever that trash was.",
+			],
 			paramType: "favTVShow",
 			ratingType: "negative",
 		},
 		{
-			predicates: ["I'm just imagining", "and their iconic line in that one movie: 'Meh.' I think that sums it up nicely."],
+			predicates: [
+				"I'm just imagining",
+				"and their iconic line in that one movie: 'Meh.' I think that sums it up nicely.",
+			],
 			paramType: "favActor",
 			ratingType: "average",
 		},
 		{
-			predicates: ["If", "is the poster child for exceptional film, this is the poster child for 'You tried'."],
+			predicates: [
+				"If",
+				"is the poster child for exceptional film, this is the poster child for 'You tried'.",
+			],
 			paramType: "favFilm",
 			ratingType: "average",
 		},
 		{
-			predicates: ["I have such good memories watching every episode of", "and yet I'm already forgetting what happened in this. It's like Marty McFly watching himself disappear in photos, minus the panic."],
+			predicates: [
+				"I have such good memories watching every episode of",
+				"and yet I'm already forgetting what happened in this. It's like Marty McFly watching himself disappear in photos, minus the panic.",
+			],
 			paramType: "favTVShow",
 			ratingType: "average",
 		},
 		{
-			predicates: ["If", "were in this, it would have gone to another level. Like Pacino in The Godfather or Shaq in all those god-forsaken The General commercials. You remember those?"],
+			predicates: [
+				"If",
+				"were in this, it would have gone to another level. Like Pacino in The Godfather or Shaq in all those god-forsaken The General commercials. You remember those?",
+			],
 			paramType: "favActor",
 			ratingType: "positive",
 		},
 		{
-			predicates: ["If you were to bring both that and", "out to me on two dinner plates, basting in their own juices, I'd have half a mind to shove them both in my mouth whole. I'd gobble them down while not breaking eye contact with you for even a second. Not even one second."],
+			predicates: [
+				"If you were to bring both that and",
+				"out to me on two dinner plates, basting in their own juices, I'd have half a mind to shove them both in my mouth whole. I'd gobble them down while not breaking eye contact with you for even a second. Not even one second.",
+			],
 			paramType: "favFilm",
 			ratingType: "positive",
 		},
 		{
-			predicates: ["You remember when hive mind kicked in and everybody could not stop talking about every new episode of", "every week? And how we never felt less alone in those moments that we shared together? You remember? I'm not crying. My spit just went down the wrong pipe, that's all."],
+			predicates: [
+				"You remember when hive mind kicked in and everybody could not stop talking about every new episode of",
+				"every week? And how we never felt less alone in those moments that we shared together? You remember? I'm not crying. My spit just went down the wrong pipe, that's all.",
+			],
 			paramType: "favTVShow",
 			ratingType: "positive",
 		},
 		{
-			predicates: ["Then the patron saint, Lord", "blessed me and whispered gently that everything is going to be okay after I watched that. All of the world's problems: poof. And then we both ate chicken nuggys and passed tf out."],
+			predicates: [
+				"Then the patron saint, Lord",
+				"blessed me and whispered gently that everything is going to be okay after I watched that. All of the world's problems: poof. And then we both ate chicken nuggys and passed tf out.",
+			],
 			paramType: "favActor",
 			ratingType: "exceptional",
 		},
 		{
-			predicates: ["It's like see ya later", "new best friend unlocked. Man I'm sweaty. Seriously, feel my back."],
+			predicates: [
+				"It's like see ya later",
+				"new best friend unlocked. Man I'm sweaty. Seriously, feel my back.",
+			],
 			paramType: "favFilm",
 			ratingType: "exceptional",
 		},
 		{
-			predicates: ["Remember that time we pulled an all-nighter watching every episode of", "back to back? Remember when we said nobody would ever top that show? Remember how stupid we were because we thought that? Because it has officially been topped and honestly it's made me realize I don't actually value this friendship anymore. It's not your fault, watching this just made my brain too big to be friends with you. I mean you get it, right?"],
+			predicates: [
+				"Remember that time we pulled an all-nighter watching every episode of",
+				"back to back? Remember when we said nobody would ever top that show? Remember how stupid we were because we thought that? Because it has officially been topped and honestly it's made me realize I don't actually value this friendship anymore. It's not your fault, watching this just made my brain too big to be friends with you. I mean you get it, right?",
+			],
 			paramType: "favTVShow",
 			ratingType: "exceptional",
 		},

@@ -4,8 +4,8 @@ import { FilmFlamBaseEntity } from "./FilmFlamBaseEntity.js";
 import { Enum } from "@mikro-orm/core";
 
 export enum UserRole {
-	ADMIN = 'Admin',
-	USER = 'User'
+	ADMIN = "Admin",
+	USER = "User",
 }
 
 @SoftDeletable(() => User, "deleted_at", () => new Date())

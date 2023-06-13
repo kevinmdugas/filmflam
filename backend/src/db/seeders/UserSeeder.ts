@@ -12,7 +12,7 @@ export class UserSeeder extends Seeder {
 			favTVShow: "My Family is Your Family: The Life and Times of Vin Diesel",
 			role: UserRole.ADMIN,
 			password: "adminPassword",
-			loginUID: "Sqhi8Pu1sSMavKfdN4cSrjwJrMs1"
+			loginUID: "Sqhi8Pu1sSMavKfdN4cSrjwJrMs1",
 		});
 
 		context.user2 = em.create(User, {
@@ -40,7 +40,7 @@ export class UserSeeder extends Seeder {
 			email: "email4@email.com",
 			role: UserRole.USER,
 			password: "password",
-			loginUID: "Rp1g6b6RwMPPuTqOxOxblzCiy1n2"
+			loginUID: "Rp1g6b6RwMPPuTqOxOxblzCiy1n2",
 		});
 
 		context.user5 = em.create(User, {
@@ -49,7 +49,7 @@ export class UserSeeder extends Seeder {
 			favTVShow: "The first six seasons of Game of Thrones",
 			role: UserRole.USER,
 			password: "password",
-			loginUID: "i2XqUlkqnOU9Dy0e8tGiD8eCFBr1"
+			loginUID: "i2XqUlkqnOU9Dy0e8tGiD8eCFBr1",
 		});
 	}
 }

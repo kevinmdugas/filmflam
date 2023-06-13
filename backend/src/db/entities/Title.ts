@@ -1,5 +1,5 @@
 import { Entity, Property } from "@mikro-orm/core";
-import type {RatingType, TitleType} from "../../types.js";
+import type { RatingType, TitleType } from "../../types.js";
 
 /*
 Ingested from the ingestion/FinalTitleSet.json file

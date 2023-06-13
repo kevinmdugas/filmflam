@@ -1,7 +1,7 @@
 import type { Dictionary, EntityManager } from "@mikro-orm/core";
 import { Seeder } from "@mikro-orm/seeder";
 import { Title } from "../entities/Title.js";
-import {RatingType, RawTitle} from "../../types.js";
+import { RatingType, RawTitle } from "../../types.js";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import path from "path";
@@ -28,7 +28,7 @@ export class TitleSeeder extends Seeder {
 	}
 }
 function determineRatingType(rating: number): RatingType {
-	let ratingType
+	let ratingType;
 	if (rating < 5) {
 		ratingType = "terrible";
 	} else if (rating < 7) {
