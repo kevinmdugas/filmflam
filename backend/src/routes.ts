@@ -1,7 +1,7 @@
 import { User, UserRole } from "./db/entities/User.js";
 import { FastifyInstance, FastifyReply } from "fastify";
 import { SOFT_DELETABLE_FILTER } from "mikro-orm-soft-delete";
-import {CreateUserBody, ParamType, RatingType, UpdateUserBody} from "./types.js";
+import {CreateUserBody, ParamType, RatingType} from "./types.js";
 import dotenv from "dotenv";
 import {Title} from "./db/entities/Title.js";
 import {Statement} from "./db/entities/Statement.js";
@@ -22,10 +22,8 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 
 	// Create user
 	app.post<{ Body: CreateUserBody }>("/users", async (req, reply: FastifyReply) => {
-		// Fish data out of request (auto converts from json)
 		const { email, name, favActor, favFilm, favTVShow, password, loginUID } = req.body;
 		try {
-			// Get our manager from the plugin we wrote
 			const newUser = await req.em.create(User, {
 				email,
 				name,
@@ -36,8 +34,6 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 				password,
 				loginUID
 			});
-			// This will immediately update the real database.  You can store up several changes and flush only once
-			// NOTE THE AWAIT -- do not forget it or weirdness abounds
 			await req.em.flush();
 			return reply.send(newUser);
 		} catch (err) {
@@ -71,15 +67,10 @@ async function FFRoutes(app: FastifyInstance, _options = {}) {
 
 
 	// Update user
-	app.put<{ Body: UpdateUserBody }>("/users", async (req, reply) => {
-		const { loginUID, name, email, favActor, favFilm, favTVShow, reviews } = req.body;
+	app.put<{ Body: { loginUID: string, reviews: string[] } }>("/users", async (req, reply) => {
+		const { loginUID, reviews } = req.body;
 
 		const userToChange = await req.em.findOneOrFail(User, {loginUID: loginUID}, {strict: true});
-		userToChange.name = name;
-		userToChange.email = email;
-		userToChange.favActor = favActor;
-		userToChange.favFilm = favFilm;
-		userToChange.favTVShow = favTVShow;
 		userToChange.reviews = reviews;
 
 		await req.em.flush();

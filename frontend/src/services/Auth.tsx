@@ -6,17 +6,17 @@ import {
     createUserWithEmailAndPassword,
     signOut } from 'firebase/auth';
 import {useNavigate} from "react-router-dom";
-// import firebase from "firebase/compat";
-// import User = firebase.User;
+import {User} from "../types.js"
+import {UserService} from "@/services/UserService.tsx";
 
 // Firebase tutorial I followed: https://www.youtube.com/watch?v=rbuSx1yEgV8
 
 export const AuthContext = createContext<AuthContextProps | null>(null);
 
 export type AuthContextProps = {
-    userId: number | null;
+    user: User | null;
     login: (email: string, password: string) => Promise<boolean>;
-    createAccount: (email: string, password: string) => Promise<boolean>;
+    createAccount: (theUser: User) => Promise<boolean>;
     logout: () => Promise<void>;
 }
 
@@ -31,15 +31,15 @@ const firebaseConfig = {
 
 export const AuthProvider = ({ children }: any) => {
     const navigate = useNavigate();
-    const [userId, setUserId] = useState<number | null>(null);
+    const [user, setUser] = useState<User | null>(null);
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
     const login = async (email: string, password: string) => {
         try{
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            console.log(userCredential.user)
-            // setUserId(userCredential.user)
+            const theUser = await UserService.fetchUser(userCredential.user.uid);
+            setUser(theUser);
             navigate("/");
             return true
         } catch (err) {
@@ -49,10 +49,12 @@ export const AuthProvider = ({ children }: any) => {
         }
     }
 
-    const createAccount = async (email: string, password: string) => {
+    const createAccount = async (theUser: User) => {
         try{
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(userCredential.user)
+            const userCredential = await createUserWithEmailAndPassword(auth, theUser.email, theUser.password);
+            theUser.loginUID = userCredential.user.uid
+            await UserService.createUser(theUser);
+            setUser(theUser)
             navigate("/")
             return true;
         } catch (err) {
@@ -63,6 +65,7 @@ export const AuthProvider = ({ children }: any) => {
     }
 
     const logout = async () => {
+        setUser(null);
         await signOut(auth)
         navigate("/");
     }
@@ -70,7 +73,7 @@ export const AuthProvider = ({ children }: any) => {
     return (
         <AuthContext.Provider
             value={{
-                userId,
+                user,
                 login,
                 createAccount,
                 logout

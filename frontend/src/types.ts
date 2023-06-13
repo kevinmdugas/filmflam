@@ -1,14 +1,11 @@
-export type State = {
-	user: Profile | undefined;
-};
-
-export type Profile = {
-	id: number;
+export type User = {
+	loginUID: string;
 	name: string;
 	email: string;
-	favFilm: string;
-	favActor: string;
-	favTVShow: string;
+	password: string;
+	favFilm?: string;
+	favActor?: string;
+	favTVShow?: string;
 	reviews: string[];
 };
 
@@ -23,5 +20,5 @@ export type Title = {
 
 export type Review = {
 	mainStmt: string[],
-	addonStmt: string[],
+	addonStmt?: string[],
 }

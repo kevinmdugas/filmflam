@@ -1,15 +1,16 @@
 import { useAuth } from "@/services/Auth.tsx";
 import { Navigate } from "react-router-dom";
+import {User} from "@/types.js";
 
 export const ProtectedRoute = ({children}: any) => {
     const auth = useAuth();
-    let userId: number | null = null
+    let user: User | null = null
 
     if (auth) {
-        userId = auth.userId;
+        user = auth.user;
     }
 
-    if (!userId) {
+    if (!user) {
         return <Navigate to="/login" replace />;
     }
 

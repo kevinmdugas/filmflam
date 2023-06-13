@@ -1,16 +1,18 @@
-import { useState } from "react";
+import {useState} from "react";
 import {TitleService} from "@/services/TitleService.tsx";
 import {Title, Review} from "@/types.ts";
 import {ReviewService} from "@/services/ReviewService.tsx";
+import {UserService} from "@/services/UserService.tsx";
+import {useAuth} from "@/services/Auth.tsx";
 
 export const Home = () => {
-    const [user, setUser] = useState<number | null>(1);
     const [titleInput, setTitleInput] = useState("");
     const [resTitles, setResTitles] = useState<Title[] | null>(null);
     const [selectedTitle, setSelectedTitle] = useState<Title | null>(null);
     const [searchFail, setSearchFail] = useState(false);
     const [review, setReview] = useState<Review | null>(null);
     const [reviewFail, setReviewFail] = useState(false);
+    const auth = useAuth()
 
     const onSubmitButtonClick = async () => {
         setSearchFail(false);
@@ -47,7 +49,11 @@ export const Home = () => {
         }
 
         try{
-            const review: Review = await ReviewService.generateReview(title.id, user);
+            let loginUID: string | null = null
+            if (auth && auth.user){
+                loginUID = auth.user.loginUID;
+            }
+            const review: Review = await ReviewService.generateReview(title.id, loginUID);
             review.mainStmt[1] = capitalizeTitle(review.mainStmt[1])
             setReview(review)
         } catch (err) {
@@ -71,12 +77,28 @@ export const Home = () => {
         return finalReview;
     }
 
+    const handleSaveReview = async () => {
+        if (!review || !auth || !auth.user)
+            return;
+        const formattedReview = formatReview(review);
+        if (!auth.user.reviews)
+            auth.user.reviews = [formattedReview]
+        else
+            auth.user.reviews.push(formattedReview);
+        try {
+            await UserService.updateUser(auth.user);
+        } catch (err) {
+            console.error("Cannot save review: ", err)
+        }
+    }
+
     return (
         <>
             <div className="mt-5">
-                <h1 className="mb-3 text-primary">Enter the name of a movie or TV show</h1>
+                <h1 className="text-primary">Enter the name of a movie or TV show</h1>
+                <small className="mb-3">(from 1991 or later. Don't ask why.)</small>
                 <input type="title-input"
-                       className="form-control text-primary"
+                       className="form-control text-primary mt-3"
                        placeholder="The Fast and the Furious: Tokyo Drift"
                        onChange={(e) => setTitleInput(e.target.value)}
                        id="main-title-query"
@@ -141,8 +163,8 @@ export const Home = () => {
                     </div>
                     <div>
                         <button onClick={() => handleTitleSelect(selectedTitle)} className="btn btn-primary m-3">Generate Another Review</button>
-                        {user ?
-                            <button className="btn btn-primary m-3">Save Review</button>
+                        {auth?.user ?
+                            <button onClick={handleSaveReview} className="btn btn-primary m-3">Save Review</button>
                             :
                             <button className="btn btn-primary m-3 disabled">Log In to Save Review</button>
                         }

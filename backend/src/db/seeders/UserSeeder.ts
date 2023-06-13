@@ -4,7 +4,6 @@ import { User, UserRole } from "../entities/User.js";
 
 export class UserSeeder extends Seeder {
 	async run(em: EntityManager, context: Dictionary): Promise<void> {
-		// https://mikro-orm.io/docs/seeding#shared-context
 		context.user1 = em.create(User, {
 			name: "Bob",
 			email: "email@email.com",
