@@ -73,9 +73,9 @@ export const Home = () => {
     }
 
     function formatReview(review: Review): string {
-        let finalReview = review.mainStmt[0] + review.mainStmt[1] + review.mainStmt[2]
+        let finalReview = review.mainStmt[0] + "  " + review.mainStmt[1] + "  " + review.mainStmt[2]
         if (review.addonStmt) {
-            finalReview += review.addonStmt[0] + review.addonStmt[1] + review.addonStmt[2]
+            finalReview += " " + review.addonStmt[0] + "  " + review.addonStmt[1] + "  " + review.addonStmt[2]
         }
         return finalReview;
     }
