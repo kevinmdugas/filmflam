@@ -12,6 +12,7 @@ export const Home = () => {
     const [searchFail, setSearchFail] = useState(false);
     const [review, setReview] = useState<Review | null>(null);
     const [reviewFail, setReviewFail] = useState(false);
+    const [reviewSaved, setReviewSaved] = useState(false);
     const auth = useAuth()
 
     const onSubmitButtonClick = async () => {
@@ -20,6 +21,7 @@ export const Home = () => {
         setReview(null);
         setReviewFail(false);
         setSelectedTitle(null);
+        setReviewSaved(false);
         try {
             const titles: Title[] = await TitleService.fetchTitles(titleInput);
             if (titles && titles.length > 0) {
@@ -38,6 +40,7 @@ export const Home = () => {
     };
 
     const handleTitleSelect = async (title: Title | null) => {
+        setReviewSaved(false);
         if (!title) {
             console.error("Cannot generate a review, title is null");
             return;
@@ -87,6 +90,7 @@ export const Home = () => {
             auth.user.reviews.push(formattedReview);
         try {
             await UserService.updateUser(auth.user);
+            setReviewSaved(true);
         } catch (err) {
             console.error("Cannot save review: ", err)
         }
@@ -163,9 +167,13 @@ export const Home = () => {
                     </div>
                     <div>
                         <button onClick={() => handleTitleSelect(selectedTitle)} className="btn btn-primary m-3">Generate Another Review</button>
-                        {auth?.user ?
+                        {auth?.user && !reviewSaved &&
                             <button onClick={handleSaveReview} className="btn btn-primary m-3">Save Review</button>
-                            :
+                        }
+                        {auth?.user && reviewSaved &&
+                            <button className="btn btn-primary m-3 disabled">Review Saved</button>
+                        }
+                        {!auth?.user &&
                             <button className="btn btn-primary m-3 disabled">Log In to Save Review</button>
                         }
                     </div>
