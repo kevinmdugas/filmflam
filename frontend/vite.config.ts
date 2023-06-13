@@ -1,26 +1,33 @@
-import { defineConfig, loadEnv } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from "vitest/config";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-// @ts-ignore
-import * as envVars from "./.env.ts";
-
-const define: Record< string, string | undefined > = {};
-
-for (const [key, value] of Object.entries(envVars)){
-  define[`process.env.${key}`] = JSON.stringify(value);
-}
+// Generates ascii 65-90 (Capital letters) into array Vite is expecting
+const alphabet = Array.from(Array(26), (v, k) => {
+	return String.fromCharCode(k + 65);
+});
 
 export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  return {
-    plugins: [react(), tsconfigPaths()],
-    test: {
-      globals: true,
-      environment: "jsdom",
-      setupFiles: "./test/setup.ts",
-    },
-    // vite config
-    define,
-  };
+	return {
+		plugins: [react(), tsconfigPaths()],
+		test: {
+			globals: true,
+			environment: "jsdom",
+			setupFiles: "./test/setup.ts",
+		},
+		envPrefix: alphabet,
+		server: {
+			watch: {
+				usePolling: true,
+			},
+			host: true,
+			strictPort: true,
+			port: 5173,
+		},
+		build: {
+			target: "esnext",
+			emptyOutDir: true,
+			outDir: "build"
+		}
+	};
 });

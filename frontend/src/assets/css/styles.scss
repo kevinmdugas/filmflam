@@ -1,0 +1,36 @@
+
+//$body-bg: #172A3A;
+$body-bg: #05191A;
+$body-color: #09BC8A;
+$body-secondary-bg: #093A3E;
+
+$title: #FCB97D;
+$tertiary: #093A3E;
+$custom-colors: (
+  "title": $title,
+  "tertiary": $tertiary
+);
+
+$primary: #B7CDCE;
+$secondary: #09BC8A;
+$success: #09BC8A;
+$info: #EDD892;
+$warning: #FCB97D;
+$danger: #EDA493;
+$light: #004346;
+$dark: #09BC8A;
+
+$theme-colors: (
+        "primary": $primary,
+        "secondary": $secondary,
+        "success": $success,
+        "info": $info,
+        "warning": $warning,
+        "danger": $danger,
+        "light": $light,
+        "dark": $dark,
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "../../../node_modules/bootstrap/scss/bootstrap";

@@ -126,6 +126,33 @@
           "primary": false,
           "nullable": false,
           "mappedType": "string"
+        },
+        "rating_type": {
+          "name": "rating_type",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "year": {
+          "name": "year",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "genres": {
+          "name": "genres",
+          "type": "text[]",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "array"
         }
       },
       "name": "title",
@@ -184,6 +211,15 @@
           "nullable": true,
           "length": 6,
           "mappedType": "datetime"
+        },
+        "login_uid": {
+          "name": "login_uid",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
         },
         "email": {
           "name": "email",
@@ -265,6 +301,15 @@
       "name": "users",
       "schema": "public",
       "indexes": [
+        {
+          "columnNames": [
+            "login_uid"
+          ],
+          "composite": false,
+          "keyName": "users_login_uid_unique",
+          "primary": false,
+          "unique": true
+        },
         {
           "columnNames": [
             "email"

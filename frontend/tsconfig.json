@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["src/*"],
-      "@css/*": ["src/assets/css/*"],
-      "@images/*": ["src/assets/images/*"]
+      "@/*": ["./src/*"],
+      "@css/*": ["./src/assets/css/*"],
+      "@images/*": ["./src/assets/images/*"]
     },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -23,13 +23,14 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "test/**/*.ts",
+    "./src/**/*.ts",
+    "./src/**/*.d.ts",
+    "./src/**/*.tsx",
+    "./test/**/*.ts",
     "node_modules/.pnpm/cypress@12.11.0/node_modules/cypress/types/cypress-global-vars.d.ts"
   ],
   "outDir": "./build",
