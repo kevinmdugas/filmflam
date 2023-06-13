@@ -1,5 +1,15 @@
 # FilmFlam
 
+## How to Run
+
+Should only need to run `docker compose up` for entire site to be usable on port 80.
+Authentication is implemented with Google Firebase Authentication and it requires the
+API_KEY stored in the .env file. 
+
+Note that the database seeds after every `docker compose up`
+so any new users you created will not persist once you stop running docker. This is due
+to accomodating the static data sets explained below in the next section.
+
 ## Datasets
 
 Title data was collected from IMDb's freely available
