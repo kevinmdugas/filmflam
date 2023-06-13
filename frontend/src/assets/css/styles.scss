@@ -1,34 +1,33 @@
-
 //$body-bg: #172A3A;
-$body-bg: #05191A;
-$body-color: #09BC8A;
-$body-secondary-bg: #093A3E;
+$body-bg: #05191a;
+$body-color: #09bc8a;
+$body-secondary-bg: #093a3e;
 
-$title: #FCB97D;
-$tertiary: #093A3E;
+$title: #fcb97d;
+$tertiary: #093a3e;
 $custom-colors: (
-  "title": $title,
-  "tertiary": $tertiary
+	"title": $title,
+	"tertiary": $tertiary,
 );
 
-$primary: #B7CDCE;
-$secondary: #09BC8A;
-$success: #09BC8A;
-$info: #EDD892;
-$warning: #FCB97D;
-$danger: #EDA493;
+$primary: #b7cdce;
+$secondary: #09bc8a;
+$success: #09bc8a;
+$info: #edd892;
+$warning: #fcb97d;
+$danger: #eda493;
 $light: #004346;
-$dark: #09BC8A;
+$dark: #09bc8a;
 
 $theme-colors: (
-        "primary": $primary,
-        "secondary": $secondary,
-        "success": $success,
-        "info": $info,
-        "warning": $warning,
-        "danger": $danger,
-        "light": $light,
-        "dark": $dark,
+	"primary": $primary,
+	"secondary": $secondary,
+	"success": $success,
+	"info": $info,
+	"warning": $warning,
+	"danger": $danger,
+	"light": $light,
+	"dark": $dark,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);

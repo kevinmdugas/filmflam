@@ -27,7 +27,7 @@ export default defineConfig(({ command, mode }) => {
 		build: {
 			target: "esnext",
 			emptyOutDir: true,
-			outDir: "build"
-		}
+			outDir: "build",
+		},
 	};
 });

@@ -10,15 +10,15 @@ export type User = {
 };
 
 export type Title = {
-	id: string,
-	titleType: string,
-	primaryTitle: string,
-	averageRating: string,
-	genres: string[],
-	year: string
-}
+	id: string;
+	titleType: string;
+	primaryTitle: string;
+	averageRating: string;
+	genres: string[];
+	year: string;
+};
 
 export type Review = {
-	mainStmt: string[],
-	addonStmt?: string[],
-}
+	mainStmt: string[];
+	addonStmt?: string[];
+};

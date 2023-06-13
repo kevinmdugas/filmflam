@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import "@css/App.css";
-import {FilmFlamRoutes} from "@/Routes.tsx";
-import {AuthProvider} from "@/services/Auth.tsx";
+import { FilmFlamRoutes } from "@/Routes.tsx";
+import { AuthProvider } from "@/services/Auth.tsx";
 
 function App() {
 	return (
